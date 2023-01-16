@@ -52,7 +52,7 @@ const calculate = computed(() => {
                     <th colspan="2" class="text-center">Operation</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="useCart.cart.length > 0">
                   <tr
                     v-for="(item, index) of useCart.cart"
                     :key="item.id"
@@ -84,6 +84,11 @@ const calculate = computed(() => {
                       >
                     </td>
                     <td><v-btn color="#FFDE03">Edit</v-btn></td>
+                  </tr>
+                </tbody>
+                <tbody v-else>
+                  <tr>
+                    <td colspan="5" style="text-align: center">No Data</td>
                   </tr>
                 </tbody>
               </v-table>

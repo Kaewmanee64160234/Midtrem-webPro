@@ -27,6 +27,9 @@ const emit = defineEmits<{
           </div>
           <strong>{{ props.price }}</strong>
         </v-card-text>
+        <v-card-actions>
+          <v-btn>Add to Cart</v-btn>
+        </v-card-actions>
       </div>
     </v-card>
   </div>
