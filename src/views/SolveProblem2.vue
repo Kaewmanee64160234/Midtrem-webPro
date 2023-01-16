@@ -1,5 +1,48 @@
-<script lang="ts" setup></script>
+<!-- eslint-disable vue/no-side-effects-in-computed-properties -->
+<!-- eslint-disable prettier/prettier -->
+<script lang="ts" setup>
+import { computed, ref } from "vue";
+const num = ref(0);
+const list = ref([0]);
+const calLoop = computed(() => {
+  list.value = [];
+  if(num.value === 0 || !num.value){
+    list.value = [];
+    return list.value;
+  }
+  for (let i = 0; i < num.value; i++) {
+    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+    list.value.push(i+1);
+  }
+  return list.value;
+});
+
+// computed(() => {
+//   return calLoop();
+// });
+
+// watch(
+//   () => list.value,
+//   (_list) => {
+//     calLoop(_list);
+//   }
+// );
+</script>
 
 <template>
-  <div></div>
+  <div style="padding: 50px">
+    <v-row>
+      <v-text-field
+        v-model="num"
+        :rules="[(v) => !!v || 'Number is not empty!!']"
+        label="Number"
+        required
+      ></v-text-field>
+    </v-row>
+    <v-row>
+      <v-col cols="12" md="1" v-for="item in calLoop" :key="item">{{
+        item
+      }}</v-col>
+    </v-row>
+  </div>
 </template>
