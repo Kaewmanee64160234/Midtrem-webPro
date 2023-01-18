@@ -1,19 +1,48 @@
 <script lang="ts" setup>
-import { computed } from "vue";
-import CardMenu from "@/components/CardMenu.vue";
-import { useMenuStore } from "@/stores/menu.store";
-import { useCartStore } from "@/stores/cart.store";
-const useMenu = useMenuStore();
-const useCart = useCartStore();
+import { computed, ref } from "vue";
+import type Menu from "@/stores/types/Menu.type";
+const products = ref(
+  Array.from(Array(100).keys()).map((item) => {
+    return {
+      id: item,
+      name: "Product " + (item + 1),
+      price: (Math.floor(Math.random() * 100) + 1) * 10,
+      unit: 0,
+    };
+  })
+);
+const cart = ref<Menu[]>([]);
+const AddToCart = (item: Menu) => {
+  const repeat = cart.value.findIndex((items) => items.id == item.id);
+  if (repeat >= 0) {
+    item.unit += 1;
+  } else if (repeat == -1) {
+    item.unit += 1;
+    cart.value.push(item);
+  }
+};
 
+const AddUnit = (item: Menu) => {
+  item.unit += 1;
+};
+const deleteUnit = (item: Menu) => {
+  if (item.unit > 0) {
+    item.unit -= 1;
+  }
+  if (item.unit <= 0) {
+    const index = cart.value.findIndex((items) => items.id == item.id);
+    cart.value.splice(index, 1);
+  }
+};
+const deleteList = (item: Menu) => {
+  const index = cart.value.findIndex((items) => items.id == item.id);
+  cart.value.splice(index, 1);
+};
 const calculate = computed(() => {
-  if (useCart.cart.length < 1) {
+  if (cart.value.length < 1) {
     return 0;
   }
-  return useCart.cart.reduce(
-    (total, menu) => total + menu.price * menu.unit,
-    0
-  );
+  return cart.value.reduce((total, menu) => total + menu.price * menu.unit, 0);
 });
 </script>
 <template>
@@ -28,14 +57,28 @@ const calculate = computed(() => {
             <v-col
               cols="12"
               md="4"
-              v-for="(menu, index) in useMenu.products"
+              v-for="(menu, index) in products"
               :key="index"
             >
-              <CardMenu
-                :title="menu.name"
-                :price="menu.price"
-                @click="useCart.AddToCart(menu)"
-              ></CardMenu>
+              <v-card style="height: 300px; cursor: pointer">
+                <img
+                  style="height: 50%; object-fit: cover; width: 100%"
+                  src="https://i.imgflip.com/443119.png"
+                />
+                <div>
+                  <v-card-text style="text-align: center; cursor: pointer">
+                    <div class="font-weight-bold">
+                      {{ menu.name }}
+                    </div>
+                    <strong>{{ menu.price }}</strong>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-btn color="primary" @click="AddToCart(menu)"
+                      >Add to Cart</v-btn
+                    >
+                  </v-card-actions>
+                </div>
+              </v-card>
             </v-col>
           </v-row>
         </v-col>
@@ -52,9 +95,9 @@ const calculate = computed(() => {
                     <th colspan="2" class="text-center">Operation</th>
                   </tr>
                 </thead>
-                <tbody v-if="useCart.cart.length > 0">
+                <tbody v-if="cart.length > 0">
                   <tr
-                    v-for="(item, index) of useCart.cart"
+                    v-for="(item, index) of cart"
                     :key="item.id"
                     style="text-align: center"
                   >
@@ -65,21 +108,21 @@ const calculate = computed(() => {
                         icon
                         color="secondary "
                         class="ma-2"
-                        @click="useCart.AddUnit(item)"
+                        @click="AddUnit(item)"
                         >+</v-btn
                       >
                       {{ item.unit }}
                       <v-btn
                         icon
                         color="error"
-                        @click="useCart.deleteUnit(item)"
+                        @click="deleteUnit(item)"
                         class="ma-2"
                         >-</v-btn
                       >
                     </td>
                     <td>{{ item.price }}</td>
                     <td>
-                      <v-btn color="error" @click="useCart.deleteList(item)"
+                      <v-btn color="error" @click="deleteList(item)"
                         >Delete</v-btn
                       >
                     </td>
@@ -95,7 +138,9 @@ const calculate = computed(() => {
             </v-container>
           </v-row>
           <v-row height="30%">
-            <v-container> total:{{ calculate }} </v-container>
+            <v-container class="mt-5">
+              <h2>total:{{ calculate }} Bath</h2></v-container
+            >
           </v-row>
           <v-row height="20%"></v-row>
         </v-col>

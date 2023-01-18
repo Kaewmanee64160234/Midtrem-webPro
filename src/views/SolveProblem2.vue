@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/no-side-effects-in-computed-properties -->
-<!-- eslint-disable prettier/prettier -->
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, ref } from "vue";
 const num = ref(0);
 const list = ref([0]);
@@ -15,17 +14,6 @@ const calLoop = computed(() => {
   }
   return list.value;
 });
-
-// computed(() => {
-//   return calLoop();
-// });
-
-// watch(
-//   () => list.value,
-//   (_list) => {
-//     calLoop(_list);
-//   }
-// );
 </script>
 
 <template>
