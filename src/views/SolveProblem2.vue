@@ -6,13 +6,12 @@ const num = ref(0);
 const list = ref([0]);
 const calLoop = computed(() => {
   list.value = [];
-  if(num.value === 0 || !num.value){
+  if (num.value === 0 || !num.value) {
     list.value = [];
     return list.value;
   }
   for (let i = 0; i < num.value; i++) {
-    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-    list.value.push(i+1);
+    list.value.push(i + 1);
   }
   return list.value;
 });
@@ -35,7 +34,7 @@ const calLoop = computed(() => {
       <v-text-field
         v-model="num"
         :rules="[(v) => !!v || 'Number is not empty!!']"
-        label="Number"
+        label="Please input Number "
         required
       ></v-text-field>
     </v-row>

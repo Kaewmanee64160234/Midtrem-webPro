@@ -7,6 +7,12 @@ export const useCounterStore = defineStore("counter", () => {
   function increment() {
     count.value++;
   }
-
-  return { count, doubleCount, increment };
+  function decrease() {
+    if (count.value > 0) {
+      count.value--;
+    } else {
+      count.value = 0;
+    }
+  }
+  return { count, doubleCount, increment, decrease };
 });

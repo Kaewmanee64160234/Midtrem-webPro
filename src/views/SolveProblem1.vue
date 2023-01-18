@@ -111,7 +111,7 @@ const changeEmoji = (name: string) => {
           :src="img"
         ></v-img>
       </v-col>
-      <v-col style="width: 50vh; margin:auto 0;">
+      <v-col style="width: 50vh; margin: auto 0">
         <v-row>
           <h1 class="btnwidth" style="text-align: center">
             {{ text }}
@@ -133,6 +133,6 @@ const changeEmoji = (name: string) => {
 <style scoped>
 .btnwidth {
   width: 80%;
-  margin:10px 0;
+  margin: 10px 0;
 }
 </style>
