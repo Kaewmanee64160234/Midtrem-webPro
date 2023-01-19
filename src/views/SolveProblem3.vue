@@ -105,6 +105,8 @@ const calculate = computed(() => {
                     <td>{{ item.name }}</td>
                     <td>
                       <v-btn
+                      width="25px"
+                      height="25px"
                         icon
                         color="secondary "
                         class="ma-2"
@@ -113,6 +115,8 @@ const calculate = computed(() => {
                       >
                       {{ item.unit }}
                       <v-btn
+                      width="25px"
+                      height="25px"
                         icon
                         color="error"
                         @click="deleteUnit(item)"

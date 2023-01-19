@@ -19,10 +19,11 @@ const calLoop = computed(() => {
 <template>
   <div style="padding: 50px">
     <v-row>
+       <!-- fixlable -->
       <v-text-field
         v-model="num"
         :rules="[(v) => !!v || 'Number is not empty!!']"
-        label="Please input Number "
+        label="Please input Number"
         required
       ></v-text-field>
     </v-row>
