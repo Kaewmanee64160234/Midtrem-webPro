@@ -48,57 +48,21 @@ const changeEmoji = (name: string) => {
   if (name === "ANGRY") {
     img.value = list.value[0].img;
     text.value = list.value[0].name;
-    list.value[0].color = `yellow`;
-    list.value[1].color = ``;
-    list.value[2].color = ``;
-    list.value[3].color = ``;
-    list.value[4].color = ``;
-    list.value[5].color = ``;
   } else if (name === "CUTE") {
     img.value = list.value[1].img;
     text.value = list.value[1].name;
-    list.value[0].color = ``;
-    list.value[1].color = `yellow`;
-    list.value[2].color = ``;
-    list.value[3].color = ``;
-    list.value[4].color = ``;
-    list.value[5].color = ``;
   } else if (name === "EXCITED") {
     img.value = list.value[2].img;
     text.value = list.value[2].name;
-    list.value[0].color = ``;
-    list.value[1].color = ``;
-    list.value[2].color = `yellow`;
-    list.value[3].color = ``;
-    list.value[4].color = ``;
-    list.value[5].color = ``;
   } else if (name === "PAIN") {
     img.value = list.value[3].img;
     text.value = list.value[3].name;
-    list.value[0].color = ``;
-    list.value[1].color = ``;
-    list.value[2].color = ``;
-    list.value[3].color = `yellow`;
-    list.value[4].color = ``;
-    list.value[5].color = ``;
   } else if (name === "SHOCKED") {
     img.value = list.value[4].img;
     text.value = list.value[4].name;
-    list.value[0].color = ``;
-    list.value[1].color = ``;
-    list.value[2].color = ``;
-    list.value[3].color = ``;
-    list.value[4].color = `yellow`;
-    list.value[5].color = ``;
   } else if (name === "SMILE") {
     img.value = list.value[5].img;
     text.value = list.value[5].name;
-    list.value[0].color = ``;
-    list.value[1].color = ``;
-    list.value[2].color = ``;
-    list.value[3].color = ``;
-    list.value[4].color = ``;
-    list.value[5].color = `yellow`;
   }
 };
 </script>
@@ -121,7 +85,6 @@ const changeEmoji = (name: string) => {
           ><v-btn
             class="btnwidth"
             @click="changeEmoji(set.title)"
-            :color="set.color"
             >{{ set.title }}</v-btn
           ></v-row
         >
@@ -134,5 +97,8 @@ const changeEmoji = (name: string) => {
 .btnwidth {
   width: 80%;
   margin: 10px 0;
+}
+.btnwidth:focus{
+  background-color: yellow;
 }
 </style>
