@@ -64,6 +64,7 @@ const changeEmoji = (name: string) => {
     img.value = list.value[5].img;
     text.value = list.value[5].name;
   }
+  list.value[5].color = "";
 };
 </script>
 <template>
@@ -85,6 +86,7 @@ const changeEmoji = (name: string) => {
           ><v-btn
             class="btnwidth"
             @click="changeEmoji(set.title)"
+            :color="set.color"
             >{{ set.title }}</v-btn
           ></v-row
         >
